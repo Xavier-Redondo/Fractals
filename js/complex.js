@@ -1,10 +1,9 @@
-'use strict';
-
 // In this case we do not use this, and instead we build the methods for each element.
 // This has a penalty in performance because the methods are created always.
 // Besides JSLint says that the new is out of scope (!!!!?)
 
 var Complex = function (real, imaginary) {
+    'use strict';
     var x = Object.create(null);
     x.real = real;
     x.imaginary = imaginary;
@@ -55,6 +54,7 @@ var Complex = function (real, imaginary) {
 
 // Esta manera usa object prototyping en lugar de function prototpying como el complex
 var OperationalPoint = function (real, imaginary, frec, colourMethod) {
+    'use strict';
     this.complex = new Complex(real, imaginary);
     this.frec = frec;
     this.colourMethod = colourMethod;
@@ -62,6 +62,7 @@ var OperationalPoint = function (real, imaginary, frec, colourMethod) {
 
 OperationalPoint.prototype = {
     getResult: function () {
+        'use strict';
         var result = this.frec.call(null, this.complex);
         return this.colourMethod.call(null, result);
     }

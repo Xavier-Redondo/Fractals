@@ -1,6 +1,5 @@
-'use strict';
-
 var generateFractal = function generateFractal(funcName){
+    'use strict';
     var t0 = performance.now();
     
     var c = document.getElementById("myCanvas");
@@ -12,15 +11,17 @@ var generateFractal = function generateFractal(funcName){
     var grid = createArray(config, op[funcName]);   // Here function to be used is op[type]
     paint(grid);
     var t1 = performance.now();
-    log("Call to drawFractal took " + (t1 - t0) + " milliseconds.")
+    log("Call to drawFractal took " + (t1 - t0) + " milliseconds.");
 };
 
 var log = function log(text){
+    'use strict';
     var c = document.getElementById("log");
     c.value += text + "\n";
 };
 
 var createArray = function createArray(config, func){
+    'use strict';
     var real, 
         minIm = config.minIm,
         minRe = config.minRe,
@@ -44,7 +45,9 @@ var createArray = function createArray(config, func){
 };
 
 var defineGetColor = function defineGetColor(config){
-    var config = config;
+    'use strict';
+    // var config = config;
+    var aux =  0;
 
     var getColor = function getColor(r){
         var BLACK = "rgb(0, 0, 0)";
@@ -53,11 +56,11 @@ var defineGetColor = function defineGetColor(config){
             return BLACK;
         }
         else if (r < Math.floor(config.maxIte/2)){
-            var aux = parseInt((2 * 255 * r / config.maxIte), 10);
+            aux = parseInt((2 * 255 * r / config.maxIte), 10);
             return "rgb(" + aux + ", 0 , 0)";        
         }
         else if (r < config.maxIte - 1 ){        
-            var aux = parseInt(255 * ((2 * r / config.maxIte) - 1 ), 10);
+            aux = parseInt(255 * ((2 * r / config.maxIte) - 1 ), 10);
             return "rgb(255," + aux + ", " + aux + ")";
         }
         else{        
@@ -70,6 +73,7 @@ var defineGetColor = function defineGetColor(config){
 
 
 var paint = function paint(arr){
+    'use strict';
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
 
@@ -79,4 +83,4 @@ var paint = function paint(arr){
             ctx.fillRect( column, row, 1, 1 );            
         });
     });
-}
+};

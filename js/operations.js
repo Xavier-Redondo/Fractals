@@ -1,10 +1,8 @@
-'use strict';
-
 var Operations = function (config) {
+    'use strict';
     var ope = Object.create(null);
 
     // Closed variables and functions
-    var config = config;
     var general = function (c, f) {
         var i = 0,
             seed = new Complex(c.real, c.imaginary),
