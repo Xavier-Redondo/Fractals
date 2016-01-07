@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html>
+<head>
+  	<meta charset="utf-8">
+
+  	<title>Example</title>
+  	<meta name="description" content="">
+  	<meta name="author" content="">
+	<link rel="stylesheet" type="text/css" href="css/fractal.css">
+</head>
+
+<body>
+<div>
+  	<canvas id="myCanvas" style="border:1px solid #c3c3c3;"  width="1200px" height="800px">
+		Your browser does not support the HTML5 canvas tag.
+	</canvas>
+</div>
+<div>
+    <button type="button" onclick="generateFractal('mandelbrot')">Mandelbrot!</button>
+  <button type="button" onclick="generateFractal('mandelbrotPower')">Power</button>
+  <button type="button" onclick="generateFractal('mandelbrotLN')">Ln</button>
+  <button type="button" onclick="generateFractal('mandelbrotCubic')">Cubic</button>
+  
+</div>
+<div>
+  <textarea id="log"></textarea>
+</div>
+    <!-- Beware of the order of this javascript functions when one file uses a constructor method of another file -->
+  	<script src="js/config.js"></script>
+    <script src="js/operations.js"></script>
+    <script src="js/complex.js"></script>
+	  <script src="js/main.js"></script>
+  	    
+</body>
+</html>
