@@ -1,22 +1,19 @@
 /**
  * Created by xavierr on 09/01/2016.
  */
-var generateFractal = function generateFractal(canvas, funcName){
-    var t0 = performance.now();
-
-    var config = CONFIG[funcName];      // This is the only place when we reference the global state
+var generateFractal = function generateFractal(canvas, config, funcName){
     config.setSize(canvas.height, canvas.width);  // Instead of using JS to determine the size of the canvas, we use the canvas size
-
     var op = new Operations(config);    // The operations depend on the config due to maxIte and maxValue
-
     var grid = createArray(config, op[funcName]);   // Here function to be used is op[type]
     paint(canvas, grid);
-    var t1 = performance.now();
-    log("Call to drawFractal took " + (t1 - t0) + " milliseconds.");
 };
 
-var zoomFractal = function zoomFractal(funcName, iniX, iniY, x, y){
-    log("calling zoom with: iniX: " + iniX + " iniY: " + iniY + " x: " + x + " y: " + y);
+var zoomFractal = function zoomFractal(canvas, config, funcName, iniX, iniY, x, y){
+    var zoomedConfig = config.zoom(iniX, iniY, x, y);
+    var op = new Operations(zoomedConfig);    // The operations depend on the config due to maxIte and maxValue
+    var grid = createArray(zoomedConfig, op[funcName]);   // Here function to be used is op[type]
+    paint(canvas, grid);
+    return zoomedConfig;
 };
 
 var paint = function paint(canvas, arr){
