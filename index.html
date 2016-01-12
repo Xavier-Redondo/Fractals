@@ -11,19 +11,24 @@
 </head>
 
 <body>
-<div class="result">
-  	<canvas class="fractalCanvas" id="myCanvas" style="border:1px solid #c3c3c3;"  width="1200px" height="800px">
-		Your browser does not support the HTML5 canvas tag.
-	</canvas>
-</div>
-<div class="fractals">
-    <button type="button" class="fractal" id="mandelbrot">Mandelbrot!</button>
-    <button type="button" class="fractal" id="mandelbrotPower">Power</button>
-    <button type="button" class="fractal" id="mandelbrotLN">Ln</button>
-    <button type="button" class="fractal" id="mandelbrotCubic">Cubic</button>
-</div>
-<div class="log">
-  <textarea id="mainLog" title="log" cols="120" rows="10"></textarea>
+<div>
+    <div id="result" class="result">
+        <canvas class="canvas" id="zoomCanvas" style="border:1px solid #c3c3c3; position: absolute; left: 0; top: 0; z-index: 1;" width="1200px" height="800px"  >
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+        <canvas class="canvas" id="fractalCanvas" style="border:1px solid #c3c3c3; position: absolute; left: 0; top: 0; z-index: 0;" width="1200px" height="800px" >
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+    </div>
+    <div class="fractals">
+        <button type="button" class="fractal" id="mandelbrot">Mandelbrot!</button>
+        <button type="button" class="fractal" id="mandelbrotPower">Power</button>
+        <button type="button" class="fractal" id="mandelbrotLN">Ln</button>
+        <button type="button" class="fractal" id="mandelbrotCubic">Cubic</button>
+    </div>
+    <div class="log">
+      <textarea id="mainLog" title="log" cols="120" rows="10"></textarea>
+    </div>
 </div>
     <!-- Beware of the order of this javascript functions when one file uses a constructor method of another file -->
     <script src="js/jquery-1.12.0.js"></script>

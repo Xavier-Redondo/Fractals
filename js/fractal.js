@@ -1,11 +1,10 @@
 /**
  * Created by xavierr on 09/01/2016.
  */
-var generateFractal = function generateFractal(canvas, config, funcName){
-    config.setSize(canvas.height, canvas.width);  // Instead of using JS to determine the size of the canvas, we use the canvas size
-    var op = new Operations(config);    // The operations depend on the config due to maxIte and maxValue
+var generateFractal = function generateFractal(config, funcName){
+    var op = new Operations(config);
     var grid = createArray(config, op[funcName]);   // Here function to be used is op[type]
-    paint(canvas, grid);
+    return grid;
 };
 
 var zoomFractal = function zoomFractal(canvas, config, funcName, iniX, iniY, x, y){
@@ -15,19 +14,6 @@ var zoomFractal = function zoomFractal(canvas, config, funcName, iniX, iniY, x, 
     paint(canvas, grid);
     return zoomedConfig;
 };
-
-var paint = function paint(canvas, arr){
-    var ctx = canvas.getContext("2d");
-
-    arr.forEach(function (inarr, column){
-        inarr.forEach(function(rgb, row){
-            ctx.fillStyle = rgb;
-            ctx.fillRect( column, row, 1, 1 );
-        });
-    });
-};
-
-
 
 var createArray = function createArray(config, func){
     var real,
