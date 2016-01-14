@@ -7,15 +7,30 @@ var generateFractal = function generateFractal(config, funcName){
     return grid;
 };
 
-var zoomFractal = function zoomFractal(canvas, config, funcName, iniX, iniY, x, y){
-    var zoomedConfig = config.zoom(iniX, iniY, x, y);
-    var op = new Operations(zoomedConfig);    // The operations depend on the config due to maxIte and maxValue
-    var grid = createArray(zoomedConfig, op[funcName]);   // Here function to be used is op[type]
-    paint(canvas, grid);
-    return zoomedConfig;
-};
 
 var createArray = function createArray(config, func){
+    var real,
+        minIm = config.minIm,
+        minRe = config.minRe,
+        height = config.height,
+        width = config.width,
+        reFactor = config.reFactor,
+        imFactor = config.imFactor,
+        result = [],
+        getColor = defineGetColor(config);
+
+    for (var w = 0; w < width; w++){
+        real = minRe + w * reFactor;
+        result[w] = [];
+        for (var h = 0; h < height; h++){
+            result[w][h] = new OperationalPoint(real, minIm + h * imFactor, func, getColor).getResult();
+        }
+    }
+    return result;
+};
+
+
+var createArrayOld = function createArrayOld(config, func){
     var real,
         minIm = config.minIm,
         minRe = config.minRe,

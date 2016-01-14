@@ -5,20 +5,25 @@ var funcName;
 var grid;
 var initTime;
 var mousePos;
+var result;
+var canvas;
+var fractalCanvas;
+var zoomCanvas;
+
+
+var redraw = function redraw(){
+    canvas.detach();
+    clearZoom(zoomCanvas);
+    grid = generateFractal(config, funcName);
+    drawFractal(fractalCanvas, grid);
+    result.html(canvas);
+}
 
 $(document).ready(function(){
-    var result = $("#result");
-    var canvas = $(".canvas");
-    var fractalCanvas = $("#fractalCanvas").get(0);
-    var zoomCanvas = $("#zoomCanvas").get(0);
-
-    var redraw = function redraw(){
-        canvas.detach();
-        clearZoom(zoomCanvas);
-        grid = generateFractal(config, funcName);
-        paint(fractalCanvas, grid);
-        result.html(canvas);
-    }
+    result = $("#result");
+    canvas = $(".canvas");
+    fractalCanvas = $("#fractalCanvas").get(0);
+    zoomCanvas = $("#zoomCanvas").get(0);
 
     $(".fractals").on("click", ".fractal", function(){
         initTime = performance.now();
@@ -83,15 +88,15 @@ var drawZoom = function drawZoom(canvas, x, y){
     clearZoom(canvas);
     ctx.globalCompositeOperation = 'source-over';
     ctx.strokeStyle = "rgb(255, 255, 255)";
-    ctx.rect(iniX, iniY, x - iniX, y - iniY);
+    // This is really what is selected, maintaining the aspect ratio in the canvas (instead of y - iniY)
+    ctx.rect(iniX, iniY, x - iniX, (x - iniX) * (canvas.height / canvas.width));
     ctx.stroke();
 }
 
-var paint = function paint(canvas, arr){
+var drawFractal = function drawFractal(canvas, arr){
     var ctx = canvas.getContext("2d");
-
-    arr.forEach(function (inarr, column){
-        inarr.forEach(function(rgb, row){
+    arr.forEach(function drawFractalColumn (inarr, column){
+        inarr.forEach(function drawFractalRow (rgb, row){
             ctx.fillStyle = rgb;
             ctx.fillRect( column, row, 1, 1 );
         });
