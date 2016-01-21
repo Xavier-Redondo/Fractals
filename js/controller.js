@@ -10,6 +10,7 @@ var canvas;
 var fractalCanvas;
 var zoomCanvas;
 
+// This is going to be a change
 
 var redraw = function redraw(){
     canvas.detach();
@@ -17,7 +18,7 @@ var redraw = function redraw(){
     grid = generateFractal(config, funcName);
     drawFractal(fractalCanvas, grid);
     result.html(canvas);
-}
+};
 
 $(document).ready(function(){
     result = $("#result");
